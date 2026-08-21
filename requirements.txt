@@ -1,1 +1,7 @@
-# Core dependencies will be added here
+pytest==8.1.1
+fastapi==0.110.0
+uvicorn==0.29.0
+pymongo==4.6.2
+SQLAlchemy==2.0.29
+streamlit==1.32.2
+pandas==2.2.1
