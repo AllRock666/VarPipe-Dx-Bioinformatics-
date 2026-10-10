@@ -33,4 +33,19 @@ This project is built to demonstrate proficiency in:
 
 ## Quickstart
 
-*(Instructions for setting up the environment, running the pipelines, and spinning up the API will be added here as the project evolves.)*
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Start the API Service
+```bash
+python -m uvicorn scripts.api.main:app --host 127.0.0.1 --port 8000
+```
+*Access the interactive API documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).*
+
+### 3. Start the Interactive Dashboard
+```bash
+python -m streamlit run scripts/dashboard/app.py
+```
+*Access the dashboard at [http://localhost:8501](http://localhost:8501).*
