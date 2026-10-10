@@ -1,6 +1,8 @@
 import pytest
-from scripts.acmg_classifier.models import VariantInfo
+
 from scripts.acmg_classifier.classifier import ACMGClassifier
+from scripts.acmg_classifier.models import VariantInfo
+
 
 @pytest.fixture
 def classifier():
@@ -40,4 +42,4 @@ def test_pathogenic_pvs1_pm2_pp3(classifier):
     
     # 1 Very Strong + 1 Moderate + 1 Supporting -> Pathogenic
     assert result.classification == "Pathogenic"
-    assert set(["PVS1", "PM2", "PP3"]).issubset(set(result.triggered_rules))
+    assert {"PVS1", "PM2", "PP3"}.issubset(set(result.triggered_rules))

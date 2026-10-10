@@ -1,5 +1,6 @@
-from .models import VariantInfo, ClassificationResult
+from .models import ClassificationResult, VariantInfo
 from .rules import get_all_rules
+
 
 class ACMGClassifier:
     def __init__(self):
@@ -55,9 +56,7 @@ class ACMGClassifier:
             return True
         if strong >= 2:
             return True
-        if strong == 1 and (mod >= 3 or (mod == 2 and sup >= 2) or (mod == 1 and sup >= 4)):
-            return True
-        return False
+        return bool(strong == 1 and (mod >= 3 or mod == 2 and sup >= 2 or mod == 1 and sup >= 4))
 
     def _check_likely_pathogenic(self, counts: dict) -> bool:
         pvs1 = counts["VeryStrong"] >= 1
@@ -75,20 +74,14 @@ class ACMGClassifier:
             return True
         if mod == 2 and sup >= 2:
             return True
-        if mod == 1 and sup >= 4:
-            return True
-        return False
+        return bool(mod == 1 and sup >= 4)
 
     def _check_benign(self, counts: dict) -> bool:
         if counts["StandAlone"] >= 1:
             return True
-        if counts["Strong"] >= 2:
-            return True
-        return False
+        return counts["Strong"] >= 2
 
     def _check_likely_benign(self, counts: dict) -> bool:
         if counts["Strong"] == 1 and counts["Supporting"] >= 1:
             return True
-        if counts["Supporting"] >= 2:
-            return True
-        return False
+        return counts["Supporting"] >= 2

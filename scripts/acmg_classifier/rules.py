@@ -1,5 +1,6 @@
-from typing import List
+
 from .models import VariantInfo
+
 
 class ACMGRule:
     name: str = "Unknown"
@@ -59,5 +60,5 @@ class BP4(ACMGRule):
             return variant.in_silico_score < 0.2
         return False
 
-def get_all_rules() -> List[ACMGRule]:
+def get_all_rules() -> list[ACMGRule]:
     return [BA1(), PM2(), PVS1(), PP3(), BP4()]

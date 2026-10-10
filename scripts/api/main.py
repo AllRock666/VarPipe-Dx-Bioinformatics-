@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
-from typing import List
 
 from . import models
-from .database import engine, get_db, annotations_collection
+from .database import annotations_collection, engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -19,7 +18,7 @@ def get_samples(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return samples
 
 @app.get("/variants")
-def get_variants(gene: str = None, classification: str = None, db: Session = Depends(get_db)):
+def get_variants(gene: str | None = None, classification: str | None = None, db: Session = Depends(get_db)):
     query = db.query(models.Variant)
     if gene:
         query = query.filter(models.Variant.gene == gene)

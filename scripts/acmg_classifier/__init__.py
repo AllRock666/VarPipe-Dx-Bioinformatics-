@@ -1,4 +1,4 @@
-from .models import VariantInfo, ClassificationResult
 from .classifier import ACMGClassifier
+from .models import ClassificationResult, VariantInfo
 
-__all__ = ['VariantInfo', 'ClassificationResult', 'ACMGClassifier']
+__all__ = ['ACMGClassifier', 'ClassificationResult', 'VariantInfo']

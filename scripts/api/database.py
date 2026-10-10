@@ -1,7 +1,8 @@
 import os
+
+from pymongo import MongoClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from pymongo import MongoClient
 
 # PostgreSQL Setup
 PG_URL = os.getenv("DATABASE_URL", "sqlite:///./varpipe_test.db") # Fallback to sqlite for dev
@@ -22,6 +23,6 @@ try:
     mongo_client = MongoClient(MONGO_URL, serverSelectionTimeoutMS=2000)
     mongo_db = mongo_client["varpipe_dx"]
     annotations_collection = mongo_db["annotations"]
-except Exception as e:
+except Exception:
     print(f"Warning: MongoDB not reachable at {MONGO_URL}. Mocking collection.")
     annotations_collection = None

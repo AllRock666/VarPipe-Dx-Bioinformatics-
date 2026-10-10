@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Optional
+
 
 @dataclass
 class VariantInfo:
@@ -10,8 +10,8 @@ class VariantInfo:
     gene: str
     consequence: str
     allele_frequency: float = 0.0
-    clinvar_sig: Optional[str] = None
-    in_silico_score: Optional[float] = None
+    clinvar_sig: str | None = None
+    in_silico_score: float | None = None
     is_lof: bool = False
     
     @property
@@ -22,4 +22,4 @@ class VariantInfo:
 class ClassificationResult:
     variant: VariantInfo
     classification: str
-    triggered_rules: List[str] = field(default_factory=list)
+    triggered_rules: list[str] = field(default_factory=list)

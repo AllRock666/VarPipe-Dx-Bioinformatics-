@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
+import argparse
 import csv
 import json
-import argparse
-from typing import Dict, List, Any
+from typing import Any
 
-def load_classified_variants(json_path: str) -> List[Dict[str, Any]]:
+
+def load_classified_variants(json_path: str) -> list[dict[str, Any]]:
     """Loads ACMG classified variants (mocked as JSON for this step)."""
     with open(json_path, 'r') as f:
         return json.load(f)
 
-def load_deseq2_results(csv_path: str, padj_threshold: float = 0.05) -> Dict[str, Dict[str, Any]]:
+def load_deseq2_results(csv_path: str, padj_threshold: float = 0.05) -> dict[str, dict[str, Any]]:
     """Loads DESeq2 results and filters for significant DE genes."""
     de_genes = {}
     with open(csv_path, 'r') as f:
@@ -26,7 +27,7 @@ def load_deseq2_results(csv_path: str, padj_threshold: float = 0.05) -> Dict[str
                 continue
     return de_genes
 
-def integrate_multi_omics(variants: List[Dict[str, Any]], de_genes: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
+def integrate_multi_omics(variants: list[dict[str, Any]], de_genes: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     """Cross-references pathogenic variants against differentially expressed genes."""
     integrated = []
     for variant in variants:
